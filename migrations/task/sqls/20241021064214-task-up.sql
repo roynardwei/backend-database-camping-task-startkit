@@ -13,7 +13,7 @@
 --     3. 用戶名稱為`肌肉棒子`，Email 為`muscle@hexschooltest.io`，Role為`USER`
 --     4. 用戶名稱為`好野人`，Email 為`richman@hexschooltest.io`，Role為`USER`
 --     5. 用戶名稱為`Q太郎`，Email 為`starplatinum@hexschooltest.io`，Role為`USER`
---     6. 用戶名稱為 `透明人，Email 為 opacity0@hexschooltest.io，Role 為 USER
+--     6. 用戶名稱為 `透明人`，Email 為 opacity0@hexschooltest.io，Role 為 USER
         insert into user (name, email, role)
         values 
         ('李燕容', 'lee2000@hexschooltest.io', 'USER'),
