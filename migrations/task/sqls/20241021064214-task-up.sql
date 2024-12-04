@@ -100,78 +100,12 @@
     INSERT INTO "COACH" (user_id, experience_years)
     VALUES
     (
-        (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io'), 2 -- 新增教練 "name"，"years"
+    (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io'),2
+    ),
+    (
+    (SELECT id FROM "USER" WHERE email = 'muscle@hexschooltest.io'),2
     ),  
     (
-        (SELECT id FROM "USER" WHERE email = 'muscle@hexschooltest.io'), 2
-    ),  
-    (
-        (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io'), 2
+    (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io'),2
     ); 
-
--- 3-2. 新增：承1，為三名教練新增專長資料至 `COACH_LINK_SKILL` ，資料需求如下：
-    -- 1. 所有教練都有 `重訓` 專長
-    -- 2. 教練`肌肉棒子` 需要有 `瑜伽` 專長
-    -- 3. 教練`Q太郎` 需要有 `有氧運動` 與 `復健訓練` 專長
-    --3-2-1 
-    INSERT INTO "COACH_LINK_SKILL" (coach_id, skill_id) VALUES
-    (
-        (SELECT id from "COACH" WHERE user_id =  (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io') ),
-        (SELECT id FROM "SKILL" WHERE name = '重訓')
-    ),
-    (
-        (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'muscle@hexschooltest.io')),
-        (SELECT id FROM "SKILL" WHERE name = '重訓')
-    ),
-    (
-        (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
-        (SELECT id FROM "SKILL" WHERE name = '重訓')
-    );    
-    --3-2-2,3-2-3,
-    INSERT INTO "COACH_LINK_SKILL" (coach_id, skill_id) VALUES 
-    (
-        (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'muscle@hexschooltest.io')),
-        (SELECT id FROM "SKILL" WHERE name = '瑜伽')),
-    (
-        (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
-        (SELECT id FROM "SKILL" WHERE name = '有氧運動')
-    ),
-    (
-        (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
-        (SELECT id FROM "SKILL" WHERE name = '復健訓練')
-    );
-
-
--- 3-3 修改：更新教練的經驗年數，資料需求如下：
-    -- 1. 教練`肌肉棒子` 的經驗年數為3年
-    -- 2. 教練`Q太郎` 的經驗年數為5年
-    --主要使用 update 更新COACH表 where 找出user_id再從USER表使用email找id.
-    3-3-1
-    update "COACH"
-    set experience_years = 3
-    where user_id =(
-    SELECT id 
-    from "USER" 
-    where "email" = 'muscle@hexschooltest.io'
-    );
-
-    3-3-2
-    update "COACH"
-    set experience_years = 5
-    where user_id =(
-    SELECT id
-    from "USER"
-    WHERE "email" = 'starplatinum@hexschooltest.io'
-    );
-    
-
--- 3-4 刪除：新增一個專長 空中瑜伽 至 SKILL 資料表，之後刪除此專長。
-    --新增空中瑜伽到SKILL表
-    --使用insert into 到skill表的(name) values值是('空中瑜珈')
-    insert into "SKILL" (name)
-    values ('空中瑜珈');
-    --刪除空中瑜伽到SKILL表
-    delete from "SKILL" 
-    where name = '空中瑜伽';
-
 
