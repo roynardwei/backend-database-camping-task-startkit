@@ -68,10 +68,10 @@
     INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits,  price_paid)
     VALUES 
         (
-        (select id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io' ),
-        (select id FROM "CREDIT_PURCHASE" WHERE name ='14 堂組合包方案'),
-        (select credit_amount FROM "CREDIT_PURCHASE" WHERE name ='14 堂組合包方案'),
-        (select price FROM "CREDIT_PURCHASE" WHERE name ='14 堂組合包方案'),
+        (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io' ),
+        (SELECT id FROM "CREDIT_PURCHASE" WHERE name ='14 堂組合包方案'),
+        (SELECT credit_amount FROM "CREDIT_PURCHASE" WHERE name ='14 堂組合包方案'),
+        (SELECT price FROM "CREDIT_PURCHASE" WHERE name ='14 堂組合包方案'),
         ),
         (
         (SELECT id FROM "USER" WHERE name = '王小明'),
@@ -116,7 +116,7 @@
     --3-2-1 
     INSERT INTO "COACH_LINK_SKILL" (coach_id, skill_id) VALUES
     (
-        (select id from "COACH" WHERE user_id =)
+        (SELECT id from "COACH" WHERE user_id =)
 
     );    
     --3-2-2,3-2-3,
@@ -143,7 +143,7 @@
     update "COACH"
     set experience_years = 3
     where user_id =(
-	select id 
+	SELECT id 
 	from "USER" 
 	where "email" = 'muscle@hexschooltest.io'
     );
@@ -152,7 +152,7 @@
     update "COACH"
     set experience_years = 5
     where user_id =(
-    select id
+    SELECT id
     from "USER"
     WHERE "email" = 'starplatinum@hexschooltest.io'
     );
