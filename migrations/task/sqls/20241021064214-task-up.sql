@@ -13,7 +13,7 @@
 --     3. 用戶名稱為`肌肉棒子`，Email 為`muscle@hexschooltest.io`，Role為`USER`
 --     4. 用戶名稱為`好野人`，Email 為`richman@hexschooltest.io`，Role為`USER`
 --     5. 用戶名稱為`Q太郎`，Email 為`starplatinum@hexschooltest.io`，Role為`USER`
---     6. 用戶名稱為 `透明人`，Email 為 opacity0@hexschooltest.io，Role 為 USER
+--     6. 用戶名稱為 `透明人`，Email 為 `opacity0@hexschooltest.io`，Role 為 USER
     insert into 
 	    "USER" (name, email, role)
     values 
@@ -65,26 +65,27 @@
     -- 1. `王小明` 購買 `14 堂組合包方案`
     -- 2. `王小明` 購買 `21 堂組合包方案`
     -- 3. `好野人` 購買 `14 堂組合包方案`
-    INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits,  price_paid)
-    VALUES 
-        (
-        (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io' ),
+    INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid)
+    VALUES
+    (
+        (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io'),
         (SELECT id FROM "CREDIT_PURCHASE" WHERE name ='14 堂組合包方案'),
         (SELECT credit_amount FROM "CREDIT_PURCHASE" WHERE name ='14 堂組合包方案'),
-        (SELECT price FROM "CREDIT_PURCHASE" WHERE name ='14 堂組合包方案'),
-        ),
-        (
+        (SELECT price FROM "CREDIT_PURCHASE" WHERE name ='14 堂組合包方案')
+    ),
+    (
         (SELECT id FROM "USER" WHERE name = '王小明'),
         (SELECT id FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'),
         (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'),
         (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案')
-        ),
-        (
+    ),
+    (
         (SELECT id FROM "USER" WHERE name = '好野人'),
         (SELECT id FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
         (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
         (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案')
-        );  
+    );  
+
 -- ████████  █████   █    ████   
 --   █ █   ██    █  █         ██ 
 --   █ █████ ███ ███       ███   
@@ -116,8 +117,16 @@
     --3-2-1 
     INSERT INTO "COACH_LINK_SKILL" (coach_id, skill_id) VALUES
     (
-        (SELECT id from "COACH" WHERE user_id =)
-
+        (SELECT id from "COACH" WHERE user_id =  (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io') ),
+		(SELECT id FROM "SKILL" WHERE name = '重訓')
+    ),
+    (
+        (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'muscle@hexschooltest.io')),
+		(SELECT id FROM "SKILL" WHERE name = '重訓')
+    ),
+    (
+        (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
+		(SELECT id FROM "SKILL" WHERE name = '重訓')
     );    
     --3-2-2,3-2-3,
     INSERT INTO "COACH_LINK_SKILL" (coach_id, skill_id) VALUES 
