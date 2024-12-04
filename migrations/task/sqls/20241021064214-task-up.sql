@@ -155,3 +155,14 @@
     SET experience_years = 5
     WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io');
 
+-- 3-4 刪除：新增一個專長 空中瑜伽 至 SKILL 資料表，之後刪除此專長。
+    --新增空中瑜伽到SKILL表
+    --使用insert into 到skill表的(name) values值是('空中瑜珈')
+
+    insert into "SKILL" (name)
+    values ('空中瑜珈');
+    
+    --刪除空中瑜伽到SKILL表
+    delete from "SKILL" 
+    where name = '空中瑜伽';
+
