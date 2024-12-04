@@ -108,4 +108,36 @@
     (
     (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io'),2
     ); 
+-- 3-2. 新增：承1，為三名教練新增專長資料至 `COACH_LINK_SKILL` ，資料需求如下：
+    -- 1. 所有教練都有 `重訓` 專長
+    -- 2. 教練`肌肉棒子` 需要有 `瑜伽` 專長
+    -- 3. 教練`Q太郎` 需要有 `有氧運動` 與 `復健訓練` 專長
+    --3-2-1 
+    INSERT INTO "COACH_LINK_SKILL" (coach_id, skill_id) VALUES
+    (
+    (SELECT id from "COACH" WHERE user_id =  (SELECT id FROM "USER" WHERE email = 'lee2000@hexschooltest.io')),
+    (SELECT id FROM "SKILL" WHERE name = '重訓')
+    ),
+    (
+    (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'muscle@hexschooltest.io')),
+    (SELECT id FROM "SKILL" WHERE name = '重訓')
+    ),
+    (
+    (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
+    (SELECT id FROM "SKILL" WHERE name = '重訓')
+    ); 
+--3-2-2,3-2-3,
+    INSERT INTO "COACH_LINK_SKILL" (coach_id, skill_id) VALUES 
+    (
+    (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'muscle@hexschooltest.io')),
+    (SELECT id FROM "SKILL" WHERE name = '瑜伽')
+    ),
+    (
+    (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
+    (SELECT id FROM "SKILL" WHERE name = '有氧運動')
+    ),
+    (
+    (SELECT id FROM "COACH" WHERE user_id = (SELECT id FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')),
+    (SELECT id FROM "SKILL" WHERE name = '復健訓練')
+    );
 
