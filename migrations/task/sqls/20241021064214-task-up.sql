@@ -46,4 +46,44 @@
 -- 1-5 查詢：取得 USER 資料表所有用戶資料，並列出前 3 筆（提示：使用limit語法）
     SELECT * FROM "USER" LIMIT 3; --選取資料表中的三筆資料
 
+--  ████████  █████   █    ████  
+--    █ █   ██    █  █         █ 
+--    █ █████ ███ ███       ███  
+--    █ █   █    ██  █     █     
+--    █ █   █████ █   █    █████ 
+-- ===================== ====================
+-- 2. 組合包方案 CREDIT_PACKAGE、客戶購買課程堂數 CREDIT_PURCHASE
+-- 2-1. 新增：在`CREDIT_PACKAGE` 資料表新增三筆資料，資料需求如下：
+    -- 1. 名稱為 `7 堂組合包方案`，價格為`1,400` 元，堂數為`7`
+    -- 2. 名稱為`14 堂組合包方案`，價格為`2,520` 元，堂數為`14`
+    -- 3. 名稱為 `21 堂組合包方案`，價格為`4,800` 元，堂數為`21`
+    INSERT INTO "CREDIT_PACKAGE" (name, price, credit_amount)
+    VALUES  ('7 堂組合包方案', 1400, 7),
+            ('14 堂組合包方案', 2520, 14),
+            ('21 堂組合包方案', 4800, 21);
+-- 2-2. 新增：在 `CREDIT_PURCHASE` 資料表，新增三筆資料：（請使用 name 欄位做子查詢）
+    -- 1. `王小明` 購買 `14 堂組合包方案`
+    -- 2. `王小明` 購買 `21 堂組合包方案`
+    -- 3. `好野人` 購買 `14 堂組合包方案`
+    INSERT INTO "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid)
+    VALUES
+    (
+        (SELECT id FROM "USER" WHERE email = 'wXlTq@hexschooltest.io'),
+        (SELECT id FROM "CREDIT_PURCHASE" WHERE name ='14 堂組合包方案'),
+        (SELECT credit_amount FROM "CREDIT_PURCHASE" WHERE name ='14 堂組合包方案'),
+        (SELECT price FROM "CREDIT_PURCHASE" WHERE name ='14 堂組合包方案')
+    ),
+    (
+        (SELECT id FROM "USER" WHERE name = '王小明'),
+        (SELECT id FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'),
+        (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案'),
+        (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '21 堂組合包方案')
+    ),
+    (
+        (SELECT id FROM "USER" WHERE name = '好野人'),
+        (SELECT id FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
+        (SELECT credit_amount FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案'),
+        (SELECT price FROM "CREDIT_PACKAGE" WHERE name = '14 堂組合包方案')
+    );  
+
 
